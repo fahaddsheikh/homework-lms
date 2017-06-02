@@ -13,7 +13,7 @@
                 <label for="batch_number" style="display: inline-block;margin: 0 10px;width:30%;width:30%;">
                     <h2>Batch Number#</h2>
                 </label>
-                <input type="text" name="batch_number" id="batch_number" value="" class="regular-text" readonly="readonly">
+                <input type="text" name="batch_number" id="batch_number" value="" class="regular-text" >
             </div>
             <div style="width:50%;float:left;margin-bottom:10px;">
                 <!-- Price -->
