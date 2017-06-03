@@ -72,7 +72,20 @@ jQuery( document ).ready(function($) {
       before_days                            = $( "#" + currentbatch + " #days" ).val();
       before_time                            = $( "#" + currentbatch + " #time" ).val();
       before_registeredstudents              = $( "#" + currentbatch + " #number_registered_students" ).val();
-      before_totalstudents                   = $( "#" + currentbatch + " #number_total_students" ).val();        
+      before_totalstudents                   = $( "#" + currentbatch + " #number_total_students" ).val();  
+
+      console.log(before_batchid)
+      console.log(before_price)
+      console.log(before_venue)
+      console.log(before_startdate)
+      console.log(before_enddate)
+      console.log(before_duration)
+      console.log(before_days)
+      console.log(before_time)
+      console.log(before_registeredstudents)
+      console.log(before_totalstudents )
+
+
       $( "#" + currentbatch + " #price" ).attr("readonly", false);             
       $( "#" + currentbatch + " #venue" ).attr("disabled", false);                     
       $( "#" + currentbatch + " #start_date" ).attr("readonly", false);            
@@ -90,6 +103,46 @@ jQuery( document ).ready(function($) {
     *
     */
     function batch_process(type, currentbatch) {
+
+      if (type == 'update') {
+        batchvars = {
+          /* Fetch values from the selected batch */
+          batchid                         : $( "#" + currentbatch + " #batch_number" ).val(),
+          price                           : $( "#" + currentbatch + " #price" ).val(),
+          venue                           : $( "#" + currentbatch + " #venue" ).val(),
+          startdate                       : $( "#" + currentbatch + " #start_date" ).val(),
+          enddate                         : $( "#" + currentbatch + " #end_date" ).val(),
+          duration                        : $( "#" + currentbatch + " #duration" ).val(),
+          days                            : $( "#" + currentbatch + " #days" ).val(),
+          time                            : $( "#" + currentbatch + " #time" ).val(),
+          registeredstudents              : $( "#" + currentbatch + " #number_registered_students" ).val(),
+          totalstudents                   : $( "#" + currentbatch + " #number_total_students" ).val(), 
+          before_batchid                  : before_batchid,
+          before_price                    : before_price,
+          before_venue                    : before_venue,
+          before_startdate                : before_startdate,
+          before_enddate                  : before_enddate,
+          before_duration                 : before_duration,
+          before_days                     : before_days,
+          before_time                     : before_time,
+          before_registeredstudents       : before_registeredstudents,
+          before_totalstudents            : before_totalstudents
+        }
+      }
+      else {
+        batchvars = {
+          batchid                         : $( "#" + currentbatch + " #batch_number" ).val(),
+          price                           : $( "#" + currentbatch + " #price" ).val(),
+          venue                           : $( "#" + currentbatch + " #venue" ).val(),
+          startdate                       : $( "#" + currentbatch + " #start_date" ).val(),
+          enddate                         : $( "#" + currentbatch + " #end_date" ).val(),
+          duration                        : $( "#" + currentbatch + " #duration" ).val(),
+          days                            : $( "#" + currentbatch + " #days" ).val(),
+          time                            : $( "#" + currentbatch + " #time" ).val(),
+          registeredstudents              : $( "#" + currentbatch + " #number_registered_students" ).val(),
+          totalstudents                   : $( "#" + currentbatch + " #number_total_students" ).val() 
+        }
+      }
       jQuery.ajax({
          type : "post",
          dataType : "text",
@@ -99,32 +152,17 @@ jQuery( document ).ready(function($) {
             post_id                         : ajax_object.post_id,
             type                            : type,
             nonce                           : $( "#" + currentbatch + " #submitted" ).val(),
-
-            /* Fetch values from the selected batch */
-            batchid                         : $( "#" + currentbatch + " #batch_number" ).val(),
-            price                           : $( "#" + currentbatch + " #price" ).val(),
-            venue                           : $( "#" + currentbatch + " #venue" ).val(),
-            startdate                       : $( "#" + currentbatch + " #start_date" ).val(),
-            enddate                         : $( "#" + currentbatch + " #end_date" ).val(),
-            duration                        : $( "#" + currentbatch + " #duration" ).val(),
-            days                            : $( "#" + currentbatch + " #days" ).val(),
-            time                            : $( "#" + currentbatch + " #time" ).val(),
-            registeredstudents              : $( "#" + currentbatch + " #number_registered_students" ).val(),
-            totalstudents                   : $( "#" + currentbatch + " #number_total_students" ).val()         
+            result                          : batchvars        
          },
          beforeSend: function() { 
             $('#show_batch_metabox').css('opacity', '0.3');
-            $('.spinner.hl-show').addClass( 'is-active' );
-
             $('.spinner.hl-create').addClass( 'is-active' );       
             $('#create-batch').prop('disabled', true);
-            
-            $('#show_batch_metabox').css('opacity', '0.3');
-            $('.spinner.hl-show').addClass( 'is-active' );
+            $('#update-batch').prop('disabled', true);
+            $('#delete-batch').prop('disabled', true);
          },
          success: function(response) {
             
-            $( ".spinner.hl-show" ).removeClass( "is-active" );
             // If php function didnt suceed show error
             if (response == -1) {
                hl_show_error('Something went wrong please try again');
@@ -132,38 +170,14 @@ jQuery( document ).ready(function($) {
             // Else show success
             else {
                $( '#create-batch' ).prop('disabled', false);
+               $('.spinner.hl-create').removeClass( 'is-active' );
                $("#show_batch_metabox").css('opacity', '1');
                getexistingbatches();
+               console.log(response);
             }
          }
       });
-
-      if (type == 'update') {
-         jQuery.ajax({
-            type : 'post',
-            dataType : 'text',
-            url : ajax_object.ajax_url,
-            data : {
-               action                          : 'hl_update_batch_ajax', 
-               post_id                         : ajax_object.post_id,
-               type                            : type,
-               nonce                           : $( "#" + currentbatch + " #submitted" ).val(),
-
-               /* Fetch values from the selected batch */
-               before_batchid                  : before_batchid,
-               before_price                    : before_price,
-               before_venue                    : before_venue,
-               before_startdate                : before_startdate,
-               before_enddate                  : before_enddate,
-               before_duration                 : before_duration,
-               before_days                     : before_days,
-               before_time                     : before_time,
-               before_registeredstudents       : before_registeredstudents,
-               before_totalstudents            : before_totalstudents
-            }
-         });
-      }
-   }
+    }
 
    /**
     *
@@ -175,6 +189,7 @@ jQuery( document ).ready(function($) {
       event.preventDefault();
       // If title of the page is not defined do not allow to create batches
       currentbatch = $(this).parent().parent().attr('id');
+      console.log(currentbatch);
       if( !$( "#title" ).val() ) {
          hl_show_error('Please save the course before assigning batches');
       }
@@ -192,6 +207,7 @@ jQuery( document ).ready(function($) {
 
    $( "#delete-batch" ).live("click", function(event){
       event.preventDefault();
+      console.log(currentbatch);
       currentbatch = $(this).parent().parent().attr('id');
       batch_process("delete", currentbatch);
    }); 
@@ -203,7 +219,6 @@ jQuery( document ).ready(function($) {
     */
 
    $( "#edit-batch" ).live("click", function(event) {
-      console.log("Clicked");
       $('.spinner.hl-show').addClass( 'is-active' );
       event.preventDefault();
       currentbatch = $(this).parent().parent().attr('id');
@@ -222,8 +237,10 @@ jQuery( document ).ready(function($) {
 
    $( "#update-batch" ).live("click", function(event){
       event.preventDefault();
+      console.log(currentbatch);
       currentbatch = $(this).parent().parent().attr('id');
       batch_process("update", currentbatch);
+
    }); 
 });
        
