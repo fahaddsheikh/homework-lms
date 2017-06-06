@@ -72,19 +72,9 @@ jQuery( document ).ready(function($) {
       before_days                            = $( "#" + currentbatch + " #days" ).val();
       before_time                            = $( "#" + currentbatch + " #time" ).val();
       before_registeredstudents              = $( "#" + currentbatch + " #number_registered_students" ).val();
-      before_totalstudents                   = $( "#" + currentbatch + " #number_total_students" ).val();  
-
-      console.log(before_batchid)
-      console.log(before_price)
-      console.log(before_venue)
-      console.log(before_startdate)
-      console.log(before_enddate)
-      console.log(before_duration)
-      console.log(before_days)
-      console.log(before_time)
-      console.log(before_registeredstudents)
-      console.log(before_totalstudents )
-
+      before_totalstudents                   = $( "#" + currentbatch + " #number_total_students" ).val(); 
+      before_discounted_price                = $( "#" + currentbatch + " #discounted_price" ).val(); 
+      before_discount_detail                 = $( "#" + currentbatch + " #discount_detail" ).val();  
 
       $( "#" + currentbatch + " #price" ).attr("readonly", false);             
       $( "#" + currentbatch + " #venue" ).attr("disabled", false);                     
@@ -95,6 +85,9 @@ jQuery( document ).ready(function($) {
       $( "#" + currentbatch + " #time" ).attr("readonly", false);                      
       $( "#" + currentbatch + " #number_registered_students" ).attr("readonly", false);
       $( "#" + currentbatch + " #number_total_students" ).attr("readonly", false);
+      $( "#" + currentbatch + " #discounted_price" ).attr("readonly", false);
+      $( "#" + currentbatch + " #discount_detail" ).attr("readonly", false);
+
    }
 
    /**
@@ -116,7 +109,9 @@ jQuery( document ).ready(function($) {
           days                            : $( "#" + currentbatch + " #days" ).val(),
           time                            : $( "#" + currentbatch + " #time" ).val(),
           registeredstudents              : $( "#" + currentbatch + " #number_registered_students" ).val(),
-          totalstudents                   : $( "#" + currentbatch + " #number_total_students" ).val(), 
+          totalstudents                   : $( "#" + currentbatch + " #number_total_students" ).val(),
+          discounted_price                : $( "#" + currentbatch + " #discounted_price" ).val(), 
+          discount_detail                 : $( "#" + currentbatch + " #discount_detail" ).val(),   
           before_batchid                  : before_batchid,
           before_price                    : before_price,
           before_venue                    : before_venue,
@@ -126,7 +121,9 @@ jQuery( document ).ready(function($) {
           before_days                     : before_days,
           before_time                     : before_time,
           before_registeredstudents       : before_registeredstudents,
-          before_totalstudents            : before_totalstudents
+          before_totalstudents            : before_totalstudents,
+          before_discounted_price         : before_discounted_price,
+          before_discount_detail          : before_discount_detail
         }
       }
       else {
@@ -140,7 +137,9 @@ jQuery( document ).ready(function($) {
           days                            : $( "#" + currentbatch + " #days" ).val(),
           time                            : $( "#" + currentbatch + " #time" ).val(),
           registeredstudents              : $( "#" + currentbatch + " #number_registered_students" ).val(),
-          totalstudents                   : $( "#" + currentbatch + " #number_total_students" ).val() 
+          totalstudents                   : $( "#" + currentbatch + " #number_total_students" ).val(),
+          discounted_price         : $( "#" + currentbatch + " #discounted_price" ).val(), 
+          discount_detail          : $( "#" + currentbatch + " #discount_detail" ).val() 
         }
       }
       jQuery.ajax({
@@ -162,7 +161,7 @@ jQuery( document ).ready(function($) {
             $('#delete-batch').prop('disabled', true);
          },
          success: function(response) {
-            
+            console.log(response);
             // If php function didnt suceed show error
             if (response == -1) {
                hl_show_error('Something went wrong please try again');
@@ -173,7 +172,7 @@ jQuery( document ).ready(function($) {
                $('.spinner.hl-create').removeClass( 'is-active' );
                $("#show_batch_metabox").css('opacity', '1');
                getexistingbatches();
-               console.log(response);
+
             }
          }
       });
@@ -189,13 +188,13 @@ jQuery( document ).ready(function($) {
       event.preventDefault();
       // If title of the page is not defined do not allow to create batches
       currentbatch = $(this).parent().parent().attr('id');
-      console.log(currentbatch);
       if( !$( "#title" ).val() ) {
          hl_show_error('Please save the course before assigning batches');
       }
       else {
-         batch_process("create", currentbatch)
-      }  
+         batch_process("create", currentbatch);
+         $( '#create_batch_metabox #batch_number' ).val(Math.floor(Math.random() * (99999 - 10000 + 1)) + 10000);
+      } 
    });
    
 
@@ -207,7 +206,6 @@ jQuery( document ).ready(function($) {
 
    $( "#delete-batch" ).live("click", function(event){
       event.preventDefault();
-      console.log(currentbatch);
       currentbatch = $(this).parent().parent().attr('id');
       batch_process("delete", currentbatch);
    }); 
@@ -237,7 +235,6 @@ jQuery( document ).ready(function($) {
 
    $( "#update-batch" ).live("click", function(event){
       event.preventDefault();
-      console.log(currentbatch);
       currentbatch = $(this).parent().parent().attr('id');
       batch_process("update", currentbatch);
 

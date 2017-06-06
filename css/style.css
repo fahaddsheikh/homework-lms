@@ -1,32 +1,73 @@
-.online-t .batch-column {
-	width: 11%;
-	text-align: center;
-	line-height: 16px;
-	font-size: 12px;
-	vertical-align: middle;
-	display: inline-block;
-	float: left;
-	min-height: 16px;
-	box-sizing: border-box;
-	padding: 0 5px;
-	text-transform: capitalize;
-}
-.single-batch {
-	margin-bottom: 20px;
-	line-height: 30px;
-}
-@media only screen and (max-width: 767px)  {
-	.online-t .batch-column {
-		width: 100%;
-		font-size:20px;
-		line-height:30px;
-	}
-	.single-batch {
-		border-bottom:1px solid #eee;
-	}
-	.course-features .single-batch .course-booking-button {
-		font-size: 25px;
-		margin: 10px;
-		display: block;
-	}
+.online-t .batch-column {
+	width: 11%;
+	text-align: center;
+	line-height: 16px;
+	font-size: 12px;
+	vertical-align: middle;
+	display: inline-block;
+	float: left;
+	min-height: 16px;
+	box-sizing: border-box;
+	padding: 0 5px;
+	text-transform: capitalize;
+}
+.single-batch {
+	margin-bottom: 20px;
+	line-height: 30px;
+}
+#price {
+	position:relative;
+}
+#discounted-price {
+	text-decoration: none;
+	font-weight: bold;
+	color: #ff4700;
+	font-size: 14px;
+	display: block;
+	position: relative;
+	top: -5px;
+	line-height: 10px;
+}
+#original-price {
+	text-decoration: line-through;
+	font-size: 12px;
+	position: relative;
+	top: -5px;
+	line-height: 10px;
+}
+#price .discount-detail {
+	height: 100px;
+    overflow: hidden;
+    display: block;
+    padding: 10px;
+    font-size: 85%;
+    background-color: #1C1C1C;
+    border-radius: 3px;
+    color: #F6A213;
+    margin: 0;
+    position: absolute;
+    top: -120px;
+    display: none; 
+    left: -60px;
+    width: 200px;
+    transition: all 1s ease-in;
+    text-align: left;
+}
+#price:hover .discount-detail {
+	display:block;
+}
+@media only screen and (max-width: 767px)  {
+	.online-t .batch-column {
+		width: 100%;
+		font-size:20px;
+		line-height:30px;
+	}
+	.single-batch {
+		border-bottom:1px solid #eee;
+	}
+	.course-features .single-batch .course-booking-button {
+		font-size: 25px;
+		margin: 10px;
+		display: block;
+	}
 }

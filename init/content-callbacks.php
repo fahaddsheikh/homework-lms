@@ -38,10 +38,13 @@ function hl_show_batch( $post ) {
         $venue = $outerrow['venue'];
         $number_registered_students = $outerrow['registeredstudents'];
         $number_total_students = $outerrow['totalstudents'];
-        
+        $discounted_price = $outerrow['discounted_price'];
+        $discount_detail = $outerrow['discount_detail'];
         include( plugin_dir_path( __FILE__ ) . 'metabox-template.php');
-         
       }
+      
+         
+
       echo "</div>";
 
   endif;
@@ -90,7 +93,9 @@ function hl_update_batch_ajax() {
     'days'                => sanitize_text_field( $result['days'] ),
     'time'                => sanitize_text_field( $result['time'] ),
     'registeredstudents'  => sanitize_text_field( $result['registeredstudents'] ),
-    'totalstudents'       => sanitize_text_field( $result['totalstudents'] )
+    'totalstudents'       => sanitize_text_field( $result['totalstudents'] ),
+    'discounted_price'    => sanitize_text_field( $result['discounted_price'] ),
+    'discount_detail'     => sanitize_text_field( $result['discount_detail'] ) 
   );
 
   $oldbatch = Array( 
@@ -103,12 +108,12 @@ function hl_update_batch_ajax() {
     'days'                => sanitize_text_field( $result['before_days'] ),
     'time'                => sanitize_text_field( $result['before_time'] ),
     'registeredstudents'  => sanitize_text_field( $result['before_registeredstudents'] ),
-    'totalstudents'       => sanitize_text_field( $result['before_totalstudents'] )
+    'totalstudents'       => sanitize_text_field( $result['before_totalstudents'] ),
+    'discounted_price'    => sanitize_text_field( $result['before_discounted_price'] ),
+    'discount_detail'     => sanitize_text_field( $result['before_discount_detail'] ) 
   );
 
   $type = sanitize_text_field( $_POST['type'] );
-
-  var_dump($_POST['result']);
 
   if ($type == 'delete') {
     delete_post_meta( $post_id, 'batch', $batch);

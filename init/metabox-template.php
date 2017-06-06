@@ -29,6 +29,16 @@
                 <option value="online" <?php if(isset($venue) && $venue == 'online') : echo 'selected'; endif; ?>>Online</option>
             </select>
         </div>
+        <div style="width:50%;float:left;margin-bottom:10px;">
+            <!-- Price -->
+            <label for="discounted_price" style="display: inline-block;margin: 0 10px;width:30%;width:30%;"><h2>Discounted Price(Rs)</h2></label>
+            <input type="number" style="width:50%" name="discounted_price" id="discounted_price" value="<?php if(isset($discounted_price) && empty(!$discounted_price)) : echo $discounted_price; endif; ?>" class="regular-text" <?php if(isset($batchnoset) && !empty($batchnoset)) : echo "readonly='readonly'"; endif; ?>>
+        </div>
+        <div style="width:100%;float:left;margin-bottom:10px;">
+            <!-- Price -->
+            <label for="discount_detail" style="display: inline-block;margin: 0 10px;width:30%;width:30%;"><h2 style="margin:20px 0px 10px 0;">Discount Detail</h2></label>
+            <textarea name="discount_detail" id="discount_detail" style="display: inline-block;box-sizing: border-box;margin: 0 21px;width: 97%;height: 100px;" <?php if(isset($batchnoset) && !empty($batchnoset)) : echo "readonly='readonly'"; endif; ?>><?php if(isset($discount_detail) && empty(!$discount_detail)) : echo $discount_detail; endif; ?></textarea>
+        </div>
         <div style="clear:both;"></div>
     </div>
     <div style="padding:15px;">
