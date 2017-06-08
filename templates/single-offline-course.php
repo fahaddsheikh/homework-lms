@@ -87,7 +87,7 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 						    <hr style="margin:5px 10px 25px 10px;">
 						    <?php
 				    		foreach ($latestbatch as $batch ) :
-
+				    			var_dump($batch);
 				        		if (isset($batch['batchid']))    : $batchnoset   = $batch['batchid']; endif;
 				        		if (isset($batch['startdate']))  : $startdate    = strtotime($batch['startdate']); endif;
 				        		if (isset($batch['enddate']))    : $enddate      = strtotime($batch['enddate']); endif;
@@ -98,6 +98,8 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 				        		if (isset($batch['venue']))      : $venue        = $batch['venue']; endif;
 				        		if (isset($batch['price']))      : $price        = $batch['price']; endif;
 				        		if (isset($batch['venue']))      : $venue        = $batch['venue']; endif;
+				        		if (isset($batch['discounted_price'])) : $discounted_price = $batch['discounted_price']; endif;
+				        		if (isset($batch['discount_detail'])) : $discount_detail   = $batch['discount_detail']; endif;
 				        		if (isset($batch['registeredstudents'])) : $number_registered_students = $batch['registeredstudents']; endif;
 				        		if (isset($batch['totalstudents'])) : $number_total_students = $batch['totalstudents']; endif;
 

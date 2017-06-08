@@ -18,7 +18,7 @@
 #price {
 	position:relative;
 }
-#discounted-price {
+#discounted_price {
 	text-decoration: none;
 	font-weight: bold;
 	color: #ff4700;
@@ -28,14 +28,14 @@
 	top: -5px;
 	line-height: 10px;
 }
-#original-price {
+#original_price {
 	text-decoration: line-through;
 	font-size: 12px;
 	position: relative;
 	top: -5px;
 	line-height: 10px;
 }
-#price .discount-detail {
+#price .discount_detail {
 	height: 100px;
     overflow: hidden;
     display: block;
@@ -53,7 +53,7 @@
     transition: all 1s ease-in;
     text-align: left;
 }
-#price:hover .discount-detail {
+#price:hover .discount_detail {
 	display:block;
 }
 @media only screen and (max-width: 767px)  {
