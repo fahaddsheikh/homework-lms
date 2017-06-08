@@ -87,7 +87,6 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 						    <hr style="margin:5px 10px 25px 10px;">
 						    <?php
 				    		foreach ($latestbatch as $batch ) :
-				    			var_dump($batch);
 				        		if (isset($batch['batchid']))    : $batchnoset   = $batch['batchid']; endif;
 				        		if (isset($batch['startdate']))  : $startdate    = strtotime($batch['startdate']); endif;
 				        		if (isset($batch['enddate']))    : $enddate      = strtotime($batch['enddate']); endif;
