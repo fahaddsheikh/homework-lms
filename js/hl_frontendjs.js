@@ -10,9 +10,10 @@ jQuery( document ).ready(function($) {
   		startdate 				= $( courseid + " #batch-startdate" ).text();
   		days 					= $( courseid + " #batch-days" ).text();
   		time 					= $( courseid + " #batch-time" ).text();
-  		price 					= $( courseid + " #batch-total-students" ).text();
-  		discounted_price    	= $( courseid + " #discounted_price" );
-		discount_detail     	= $( courseid + " #discount_detail" );
+  		totalstudents			= $( courseid + " #batch-registered-students" ).text();
+  		price 					= $( courseid + " #price" ).text();
+  		discounted_price    	= $( courseid + " #discounted_price" ).text();
+		discount_detail     	= $( courseid + " #discount_detail" ).text();
   		// Fetch Contact form 7 values
   		formtitle 				= $("#course-title");
 		formbatch 				= $("#batch-no");

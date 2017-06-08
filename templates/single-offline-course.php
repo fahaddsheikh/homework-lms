@@ -87,19 +87,20 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 						    <hr style="margin:5px 10px 25px 10px;">
 						    <?php
 				    		foreach ($latestbatch as $batch ) :
-				    			
-				    			$batchnoset = $batch['batchid'];
-				        		$startdate = strtotime($batch['startdate']); 
-				        		$enddate = strtotime($batch['enddate']);
-				        		$duration = $batch['duration'];
-				        		$days = $batch['days'];
-				        		$time = $batch['time'];
-				        		$price = $batch['price'];
-				        		$discounted_price = $batch['discounted_price'];
-				        		$discount_detail = $batch['discount_detail'];
-				        		$venue = $batch['venue'];
-				        		$number_registered_students = $batch['registeredstudents'];
-				        		$number_total_students = $batch['totalstudents']; 
+
+				        		if (isset($batch['batchid']))    : $batchnoset   = $batch['batchid']; endif;
+				        		if (isset($batch['startdate']))  : $startdate    = strtotime($batch['startdate']); endif;
+				        		if (isset($batch['enddate']))    : $enddate      = strtotime($batch['enddate']); endif;
+				        		if (isset($batch['duration']))   : $duration     = $batch['duration']; endif;
+				        		if (isset($batch['days']))       : $days         = $batch['days']; endif;
+				        		if (isset($batch['time']))       : $time         = $batch['time']; endif;
+				        		if (isset($batch['price']))      : $price        = $batch['price']; endif;
+				        		if (isset($batch['venue']))      : $venue        = $batch['venue']; endif;
+				        		if (isset($batch['price']))      : $price        = $batch['price']; endif;
+				        		if (isset($batch['venue']))      : $venue        = $batch['venue']; endif;
+				        		if (isset($batch['registeredstudents'])) : $number_registered_students = $batch['registeredstudents']; endif;
+				        		if (isset($batch['totalstudents'])) : $number_total_students = $batch['totalstudents']; endif;
+
 				        		if ($enddate > date("Y-m-d")) : ?>
 				        			<div id="batch-no-<?php echo $batchnoset ?>" class="single-batch">
 								        <div id="batch-id" class="batch-column"><?php echo $batchnoset; ?></div>

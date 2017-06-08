@@ -17,7 +17,7 @@ include( plugin_dir_path( __FILE__ ) . 'init/content-callbacks.php');
 */
 function hl_enqueue() {
 	wp_enqueue_style( 'hl_style', plugins_url( 'css/style.css', __FILE__ ) , array(), '1.0.0', false );
- 	wp_enqueue_script( 'hl_js', plugins_url( 'js/custom.js', __FILE__ ) , array(), '1.0.0', true );
+ 	wp_enqueue_script( 'hl_js', plugins_url( 'js/hl_frontendjs.js', __FILE__ ) , array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'hl_enqueue' );
 

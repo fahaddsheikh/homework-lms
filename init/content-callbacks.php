@@ -28,23 +28,20 @@ function hl_show_batch( $post ) {
     
     echo "<div id='show-batch-accordion'>";
     foreach ($storedbatches as $row => $outerrow) { 
-        $batchnoset = $outerrow['batchid'];
-        $startdate = $outerrow['startdate'];
-        $enddate = $outerrow['enddate'];
-        $duration = $outerrow['duration'];
-        $days = $outerrow['days'];
-        $time = $outerrow['time'];
-        $price = $outerrow['price'];
-        $venue = $outerrow['venue'];
-        $number_registered_students = $outerrow['registeredstudents'];
-        $number_total_students = $outerrow['totalstudents'];
-        $discounted_price = $outerrow['discounted_price'];
-        $discount_detail = $outerrow['discount_detail'];
+        if (isset($outerrow['batchid']))    : $batchnoset   = $outerrow['batchid']; endif;
+        if (isset($outerrow['startdate']))  : $startdate    = $outerrow['startdate']; endif;
+        if (isset($outerrow['enddate']))    : $enddate      = $outerrow['enddate']; endif;
+        if (isset($outerrow['duration']))   : $duration     = $outerrow['duration']; endif;
+        if (isset($outerrow['days']))       : $days         = $outerrow['days']; endif;
+        if (isset($outerrow['time']))       : $time         = $outerrow['time']; endif;
+        if (isset($outerrow['price']))      : $price        = $outerrow['price']; endif;
+        if (isset($outerrow['venue']))      : $venue        = $outerrow['venue']; endif;
+        if (isset($outerrow['discounted_price'])) : $discounted_price = $outerrow['discounted_price']; endif;
+        if (isset($outerrow['discount_detail'])) : $discount_detail   = $outerrow['discount_detail']; endif;
+        if (isset($outerrow['registeredstudents']))     : $number_registered_students   = $outerrow['registeredstudents']; endif;
+        if (isset($outerrow['totalstudents']))      : $number_total_students          = $outerrow['totalstudents']; endif;
         include( plugin_dir_path( __FILE__ ) . 'metabox-template.php');
       }
-      
-         
-
       echo "</div>";
 
   endif;
