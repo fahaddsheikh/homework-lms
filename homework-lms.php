@@ -16,8 +16,8 @@ include( plugin_dir_path( __FILE__ ) . 'init/content-callbacks.php');
 	Load CSS and JS Files
 */
 function hl_enqueue() {
-	wp_enqueue_style( 'hl_style', plugins_url( 'css/styling.css', __FILE__ ) , array(), '1.0.0', false );
- 	wp_enqueue_script( 'hl_js', plugins_url( 'js/custom.js', __FILE__ ) , array(), '1.0.0', true );
+	wp_enqueue_style( 'hl_style', plugins_url( 'css/style.css', __FILE__ ) , array(), '1.0.0', false );
+ 	wp_enqueue_script( 'hl_js', plugins_url( 'js/hl_frontendjs.js', __FILE__ ) , array(), '1.0.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'hl_enqueue' );
 
@@ -45,5 +45,32 @@ function hl_enqueue_admin() {
          ));
 }
 add_action( 'admin_enqueue_scripts', 'hl_enqueue_admin' ,1000 ,0 );
+
+
+/**
+ *
+ * Assign Templates
+ *
+ */
+
+
+
+function get_lms_courses_template( $archive_template ) {
+    global $post;
+
+    if ( is_post_type_archive ( 'homework-course' ) || is_search() && $_POST['post_type'] == 'homework-course' || is_tax( 'homework-course-category' )) {
+        $archive_template = dirname( __FILE__ ) . '/templates/archive-offline-courses.php';    
+    }
+    
+    if ($post->post_type == 'homework-course' && is_single( )) {
+         $archive_template = dirname( __FILE__ ) . '/templates/single-offline-course.php';
+    }
+   	return $archive_template;
+
+}
+
+add_filter( 'archive_template', 'get_lms_courses_template' );
+add_filter( 'single_template', 'get_lms_courses_template' );
+add_filter( 'template_include', 'get_lms_courses_template', 99 );
                  
  
