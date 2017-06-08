@@ -47,7 +47,7 @@ function hl_register_homework_course() {
 		'exclude_from_search'   => false,
 		'publicly_queryable'    => true,
 		'capability_type'       => 'page',
-		'rewrite'            => array( 'slug' => 'courses' ),
+		'rewrite'            => array( 'slug' => 'courses2' ),
 	);
 	register_post_type( 'homework-course', $args );
 	$labels = array(

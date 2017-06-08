@@ -55,7 +55,7 @@ add_action( 'admin_enqueue_scripts', 'hl_enqueue_admin' ,1000 ,0 );
 
 
 
-function get_offline_courses_template( $archive_template ) {
+function get_lms_courses_template( $archive_template ) {
     global $post;
 
     if ( is_post_type_archive ( 'homework-course' ) || is_search() && $_POST['post_type'] == 'homework-course' || is_tax( 'homework-course-category' )) {
@@ -69,8 +69,8 @@ function get_offline_courses_template( $archive_template ) {
 
 }
 
-add_filter( 'archive_template', 'get_offline_courses_template' );
-add_filter( 'single_template', 'get_offline_courses_template' );
-add_filter( 'template_include', 'get_offline_courses_template', 99 );
+add_filter( 'archive_template', 'get_lms_courses_template' );
+add_filter( 'single_template', 'get_lms_courses_template' );
+add_filter( 'template_include', 'get_lms_courses_template', 99 );
                  
  
