@@ -1,19 +1,26 @@
 .online-t .batch-column {
-	width: 11%;
-	text-align: center;
-	line-height: 16px;
-	font-size: 12px;
-	vertical-align: middle;
-	display: inline-block;
-	float: left;
-	min-height: 16px;
-	box-sizing: border-box;
-	padding: 0 5px;
-	text-transform: capitalize;
+    width: 12.5%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+    vertical-align: middle;
+    display: inline-block;
+    float: left;
+    min-height: 16px !important;
+    max-height: 16px !important;
+    box-sizing: border-box;
+    padding: 0 5px;
+    text-transform: capitalize;
 }
 .single-batch {
 	margin-bottom: 20px;
 	line-height: 30px;
+}
+.single-batch #batch-registered-students {
+    display: none;
+}
+#head .batch-column:nth-child(6) {
+    display: none;
 }
 #price {
 	position:relative;
