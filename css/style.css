@@ -19,6 +19,10 @@
 .single-batch #batch-registered-students {
     display: none;
 }
+#head {
+    border-bottom: 1px solid #bbbbbb;
+    padding-bottom: 10px;
+}
 #head .batch-column:nth-child(6) {
     display: none;
 }
@@ -66,11 +70,15 @@
 @media only screen and (max-width: 767px)  {
 	.online-t .batch-column {
 		width: 100%;
-		font-size:20px;
-		line-height:30px;
+		font-size: 20px;
+		line-height: 20px;
+		min-height: auto !important;
+		max-height: none !important;
+		margin-bottom: 15px;
 	}
 	.single-batch {
-		border-bottom:1px solid #eee;
+		border-bottom: 2px solid #e7e7e7;
+		margin-bottom: 50px;
 	}
 	.course-features .single-batch .course-booking-button {
 		font-size: 25px;

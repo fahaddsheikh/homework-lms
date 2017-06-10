@@ -27,7 +27,8 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 			$batches = get_post_meta( $post_id, 'batch', false );
 			if (isset($batches) && !empty($batches)) {
 				foreach ($batches as $batch) {
-		    		$price[] = $batch['price'];		    		
+		    		$price[] = $batch['price'];
+		    		$price[] = $batch['discounted_price'];	    		
 		    		$latestbatchdate = strtotime($batch['startdate']);						
 					$latestbatch[$latestbatchdate] = $batch;
 		    		
@@ -72,7 +73,7 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 					<h4 class="course-titles"><?php esc_html_e('Course Batches','michigan');?></h4>
 					<?php if (!empty($batches)) : ?>
 						<div class="course-features clearfix col-md-12 online-t">
-						    <div id="head" style="font-weight:bold;margin-bottom: 10px;" class="single-batch">
+						    <div id="head" style="font-weight:bold;" class="single-batch">
 						        <div class="batch-column">Batch No.</div>
 						        <div class="batch-column">Duration</div>
 						        <div class="batch-column">Start Date</div>
@@ -84,7 +85,6 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 						        <div class="batch-column"></div>
 						        <div class="clearfix"></div>
 						    </div>
-						    <hr style="margin:5px 10px 25px 10px;">
 						    <?php
 				    		foreach ($latestbatch as $batch ) :
 				        		if (isset($batch['batchid']))    : $batchnoset   = $batch['batchid']; endif;
@@ -218,20 +218,71 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 		</section>
 		<div class="col-md-3 sidebar">
 			<aside class="course-bar">
-				<?php
-					if(isset($course_features['instructor']) && $course_features['instructor'])				get_template_part('parts/instructor-box');
-					if(isset($course_features['sharing']) && $course_features['sharing'])					get_template_part('parts/sharing');?>
-					<div class="widget">
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- Learn Homework Responsive Banner -->
-						<ins class="adsbygoogle"
-						     style="display:block"
-						     data-ad-client="ca-pub-2825367626708661"
-						     data-ad-slot="1178049961"
-						     data-ad-format="auto"></ins>
-						<script>
-						(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
+				<?php			
+				$author_id = get_the_author_meta('ID');
+
+				$instructor_avatar = get_avatar( get_the_author_meta( 'user_email',$author_id ), 265 );
+
+				$instructor_title = get_the_author_meta( 'display_name',$author_id );
+
+				$facebook = esc_url(get_the_author_meta( "facebook",$author_id));
+
+				$twitter = esc_url(get_the_author_meta( "twitter",$author_id));
+
+				$google_plus = esc_url(get_the_author_meta( "googleplus",$author_id));
+
+				$linkedin = esc_url(get_the_author_meta( "linkedin",$author_id));
+
+				$youtube = esc_url(get_the_author_meta( "youtube",$author_id));
+
+				$instructor_email = get_the_author_meta( 'display_email' , $author_id);
+
+				$url = esc_url(get_the_author_meta( "url",$author_id));
+
+				$bio =  get_the_author_meta( "biography",$author_id);
+					
+				echo '<div class="instructor-box">';
+
+				echo '<div class="w-avatar">'.$instructor_avatar.'</div>';	
+
+				echo '<h5>'.esc_html__('Instructor: ','michigan').$instructor_title.'</h5>';
+
+				echo '<div class="instructor-info-box">';
+
+				echo '<div class="w-about-me">'.$bio.'</div>' ;
+
+				echo '<div class="social-instructor">';
+
+				echo ($url)?'<a href="'.$url.'" class="instructor-social" target="_blank"><i class="fa-globe"></i></a>':'';
+
+				echo ($instructor_email)?'<a href="mailto:'.$instructor_email.'" class="instructor-social"><i class="fa-envelope"></i></a>':'';
+
+				echo ($facebook)?'<a target="_blank" href="'.$facebook.'" class="instructor-social" target="_blank"><i class="fa-facebook"></i></a>' : '';
+
+				echo ($twitter)?'<a target="_blank" href="'.$twitter.'" class="instructor-social" target="_blank"><i class="fa-twitter"></i></a>' : '';
+
+				echo ($google_plus)?'<a target="_blank" href="'.$google_plus.'" class="instructor-social" target="_blank"><i class="fa-google-plus"></i></a>' : '';
+
+				echo ($linkedin)?'<a target="_blank" href="'.$linkedin.'" class="instructor-social" target="_blank"><i class="fa-linkedin"></i></a>' : '';				
+
+				echo ($youtube)?'<a target="_blank" href="'.$youtube.'" class="instructor-social" target="_blank"><i class="fa-youtube"></i></a>' : '';				
+
+				echo '</div>';
+
+				echo '</div>';
+
+				echo '</div>'; 
+
+				if(isset($course_features['sharing']) && $course_features['sharing'])					get_template_part('parts/sharing');?>
+
+				<ins class="adsbygoogle"
+				     style="display:block"
+				     data-ad-client="ca-pub-2825367626708661"
+				     data-ad-slot="1178049961"
+				     data-ad-format="auto"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
 					</div>
 			</aside>
 		</div>
