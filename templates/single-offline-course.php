@@ -111,7 +111,7 @@ $course_features = $michigan_webnus_options['michigan_webnus_course_features'];
 								        <div id="batch-time" class="batch-column"><?php echo $time; ?></div>
 								        <div id="batch-registered-students" class="batch-column"><?php echo $number_registered_students . '/' . $number_total_students; ?></div>
 								        <div id="venue" class="batch-column"><?php echo $venue; ?></div>
-								        <div id="price" class="batch-column" <?php if (!empty($discount_detail)) { echo "style='cursor:pointer;'"; } ?> >
+								        <div id="batch-price" class="batch-column" <?php if (!empty($discount_detail)) { echo "style='cursor:pointer;'"; } ?> >
 								        <?php if(isset($discounted_price) && !empty($discounted_price)): echo "<span id='discounted_price'>Rs. ". $discounted_price ." </span><span id='original_price'>Rs.".  $price . "</span>"; else:  echo "Rs." . $price; endif;?>
 								        	<?php 
 								        		if(isset($discount_detail) && !empty($discount_detail)): 

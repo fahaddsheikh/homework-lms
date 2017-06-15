@@ -11,13 +11,12 @@ jQuery( document ).ready(function($) {
   		days 					= $( courseid + " #batch-days" ).text();
   		time 					= $( courseid + " #batch-time" ).text();
   		totalstudents			= $( courseid + " #batch-registered-students" ).text();
-  		if ($('#discounted-price').length) {
-  			price 		= $( courseid + " #batch-price #discounted-price" ).text();
+  		if ($(courseid + " #batch-price #discounted_price").length) {
+  			price 		= $( courseid + " #batch-price #discounted_price" ).text();
   		}
   		else{
-  			price 		= $( courseid + " #batch-price #original-price" ).text();
+  			price 		= $( courseid + " #batch-price #original_price" ).text();
   		}
-  		discounted_price    	= $( courseid + " #discounted_price" ).text();
 		discount_detail     	= $( courseid + " #discount_detail" ).text();
   		// Fetch Contact form 7 values
   		formtitle 				= $("#course-title");

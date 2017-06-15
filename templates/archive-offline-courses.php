@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 get_header();
 $michigan_webnus_options = michigan_webnus_options();
 
-$offlinecategories = get_terms( 'offline_course_cat' , array(
+$offlinecategories = get_terms( 'homework-course-category' , array(
     'hide_empty' => 0
 ) );
 $blogusers = get_users( 'orderby=nicename&role=author' );
@@ -29,7 +29,7 @@ $blogusers = get_users( 'orderby=nicename&role=author' );
             'post_type' => 'homework-course',
             'tax_query' => array(
                 array(
-                    'taxonomy' => 'offline_course_cat',
+                    'taxonomy' => 'homework-course-category',
                     'field'    => 'term_id',
                     'terms'    => $tax->term_id,
                     'paged' => $paged,
