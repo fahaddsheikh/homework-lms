@@ -26,7 +26,7 @@
 #head .batch-column:nth-child(6) {
     display: none;
 }
-#price {
+#batch-price {
 	position:relative;
 }
 #discounted_price {
@@ -46,27 +46,38 @@
 	top: -5px;
 	line-height: 10px;
 }
-#price .discount_detail {
+#batch-price .discount_detail {
 	height: 100px;
     overflow: hidden;
     display: block;
     padding: 10px;
-    font-size: 85%;
+    font-size: 100%;
     background-color: #1C1C1C;
-    border-radius: 3px;
-    color: #F6A213;
+    border-radius: 5px;
+    color: #FFD500;
+    line-height: 17px;
     margin: 0;
     position: absolute;
-    top: -120px;
-    display: none; 
+    top: -115px;
+    display: none;
     left: -60px;
     width: 200px;
     transition: all 1s ease-in;
     text-align: left;
+    box-shadow: 5px 5px 10px #5e5e5e;
 }
-#price:hover .discount_detail {
+#batch-price:hover .discount_detail {
 	display:block;
 }
+
+
+/* Course Box CSS */
+
+.modern-instructor .author-avatar img{
+	margin:0;
+	margin-right:5px;
+}
+
 @media only screen and (max-width: 767px)  {
 	.online-t .batch-column {
 		width: 100%;

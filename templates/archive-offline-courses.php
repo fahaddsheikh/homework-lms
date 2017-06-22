@@ -94,15 +94,10 @@ $blogusers = get_users( 'orderby=nicename&role=author' );
                     <article class="w-course-list">
                         <div class="clearfix">
                         <div class="col-md-4 course-list-border-right">                   
-                            <figure><a class="" href="<?php the_permalink(); ?>">
-                            <?php if ( has_post_thumbnail( $post->ID ) ) {
-                                $img = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'michigan_webnus_blog2_img' );
-                                echo '<img src="' . $img[0] . '" alt="Placeholder" class="llms-course-image llms-featured-imaged wp-post-image" />';
-                            } else{
-                                $no_img = get_template_directory_uri().'/images/course_no_image.png';?>
-                                <?php echo '<img src="' . $no_img . '" alt="Placeholder" class="llms-course-image llms-placeholder wp-post-image" />';
-                            } ?>
-                            </a></figure>               </div>
+                            <figure>
+                                <a class="" href="<?php the_permalink(); ?>"><?php get_post_image(get_the_id()); ?></a>
+                            </figure>
+                        </div>
 
                         </div>
                         <div class="clearfix">
@@ -110,6 +105,12 @@ $blogusers = get_users( 'orderby=nicename&role=author' );
                                 <div class="course-list-review">
                                     <div class="modern-content">
                                         <h3 class="llms-title"><a href="<?php echo get_permalink( )?>"><?php echo get_the_title(); ?></a></h3>
+                                        <div class="llms-price-wrapper"><h4 class="llms-price"><span><?php price_starting_from(get_the_id());  ?></span></h4></div>
+                                                            <div class="clearfix modern-meta">
+                        <div class="col-md-8 col-sm-8 col-xs-8">
+                            <?php get_author_avatar(get_the_author_meta('ID')); ?>
+                        </div>
+                    </div>
                                     </div>
                                 </div>
                             </div>

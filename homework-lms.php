@@ -11,6 +11,8 @@
 include( plugin_dir_path( __FILE__ ) . 'init/register.php');
 // Content callbacks for all metaboxes 
 include( plugin_dir_path( __FILE__ ) . 'init/content-callbacks.php');
+// Shortcodes 
+include( plugin_dir_path( __FILE__ ) . 'shortcodes.php');
 
 /*
 	Load CSS and JS Files
@@ -73,4 +75,79 @@ add_filter( 'archive_template', 'get_lms_courses_template' );
 add_filter( 'single_template', 'get_lms_courses_template' );
 add_filter( 'template_include', 'get_lms_courses_template', 99 );
                  
- 
+
+/**
+ *
+ * Get Price Starting From
+ *
+ */
+function price_starting_from($post_id) {
+    $batches = get_post_meta( $post_id, 'batch', false );
+    if (!empty($batches)) {
+        foreach ($batches as $batch) {
+            $price[] = $batch['price'];
+            if (isset($batch['discounted_price'])) {
+                $price[] = $batch['discounted_price']; 
+            }
+        }
+    }
+    echo "Starting from Rs. ". intval(min($price)) ." ";   
+}
+
+
+/**
+ *
+ * Get Author link and Avatar
+ *
+ */
+
+function get_author_avatar($author_id) {
+	$instructor_title = '<a href="'.get_author_posts_url( $author_id ).'" class="author-avatar">'. get_avatar( get_the_author_meta( 'user_email',$author_id ), 20 ).get_the_author_meta( 'display_name',$author_id ).'</a>';
+	echo '<div class="modern-instructor">'.$instructor_title.'</div>';
+}
+
+
+/**
+ *
+ * Get Assigned Categories
+ *
+ */
+
+function get_assigned_categories($post_id) {
+	if (get_the_terms($post_id, 'homework-course-category' )) {
+		echo '<div class="modern-cat">';
+		$categories = get_the_terms($post_id, 'homework-course-category' );
+		$typeName = array();
+		foreach ( $categories as $category ){
+			$cat_icon = (function_exists('tax_icons_output_term_icon'))?tax_icons_output_term_icon( $category->term_id ):'';
+			$typeName[] = '<a class="hcolorf" href="' . esc_url( get_category_link( $category ) ) . '" title="' . esc_attr( sprintf( esc_html__( 'View all courses under %s', 'michigan' ), $category->name ) ) . '">'. $cat_icon . esc_html( $category->name ). '</a>';
+		}
+		echo implode(', ', $typeName);
+		echo '</div>';
+	}
+}
+
+
+/**
+ *
+ * Get Post images
+ *
+ */
+
+function get_post_image($post_id) {
+
+	if ( has_post_thumbnail( $post_id ) ) {
+		$img = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'michigan_webnus_blog2_img' );
+		if (class_exists('LLMS_Product')){
+			echo apply_filters( 'lifterlms_featured_img', '<img src="' . $img[0] . '" alt="Placeholder" class="llms-course-image llms-featured-imaged wp-post-image" />' );
+		}else{
+			echo '<img src="' . $img[0] . '" alt="Placeholder" class="llms-course-image llms-featured-imaged wp-post-image" />';
+		}
+	}elseif(function_exists('llms_placeholder_img_src')){
+		if(llms_placeholder_img_src()){
+			$no_img = get_template_directory_uri().'/images/course_no_image.png';
+			echo apply_filters( 'lifterlms_placeholder_img', '<img src="' . $no_img . '" alt="Placeholder" class="llms-course-image llms-placeholder wp-post-image" />' );
+		}
+	}
+	echo '</a>';
+}
