@@ -70,12 +70,21 @@
 	display:block;
 }
 
+/* Slider Category Box */
+
+#wrap .course-category-box-o .course-category-box {
+	background-color:rgba(255,213,0,.8) !important;
+}
 
 /* Course Box CSS */
 
 .modern-instructor .author-avatar img{
 	margin:0;
 	margin-right:5px;
+}
+
+.courses-modern .modern-grid .llms-price-wrapper .llms-price {
+    font-size: 12px;
 }
 
 @media only screen and (max-width: 767px)  {

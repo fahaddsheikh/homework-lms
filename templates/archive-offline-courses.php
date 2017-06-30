@@ -7,6 +7,8 @@ $offlinecategories = get_terms( 'homework-course-category' , array(
     'hide_empty' => 0
 ) );
 $blogusers = get_users( 'orderby=nicename&role=author' );
+
+
 ?>
 <div class="archive-course-wrap clearfix">
     <section id="headline"><div class="container"><h2>
@@ -88,6 +90,15 @@ $blogusers = get_users( 'orderby=nicename&role=author' );
             $rcount=1;
             $row=3;
             while ( $getcourses->have_posts() ) : $getcourses->the_post();
+            $post_id = get_the_ID();
+            $batches = get_post_meta( $post_id, 'batch', false );
+            if (isset($batches) && !empty($batches)) {
+                foreach ($batches as $batch) {
+                    $price[] = $batch['price'];
+                    $price[] = $batch['discounted_price'];   
+                    
+                }
+            }
                 
                 echo ($rcount == 1)?'<div class="row">':''; ?>
                 <div class="col-md-4 col-sm-6 course-list-col">
@@ -105,7 +116,7 @@ $blogusers = get_users( 'orderby=nicename&role=author' );
                                 <div class="course-list-review">
                                     <div class="modern-content">
                                         <h3 class="llms-title"><a href="<?php echo get_permalink( )?>"><?php echo get_the_title(); ?></a></h3>
-                                        <div class="llms-price-wrapper"><h4 class="llms-price"><span><?php price_starting_from(get_the_id());  ?></span></h4></div>
+                                          <div class="llms-price-wrapper"><h4 class="llms-price"><span>Starts from Rs <?php  echo intval(min($price))  ?></span></h4></div>
                                                             <div class="clearfix modern-meta">
                         <div class="col-md-8 col-sm-8 col-xs-8">
                             <?php get_author_avatar(get_the_author_meta('ID')); ?>

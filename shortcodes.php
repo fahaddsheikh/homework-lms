@@ -23,19 +23,17 @@ function popularcourses( $atts ) {
     if ( $query->have_posts() ) : ?>
     	<div class="container courses-modern">
     		<div class="row"> 
-    	<?php while ( $query->have_posts() ) : $query->the_post();
-    		?>
+    	<?php while ( $query->have_posts() ) : $query->the_post(); ?>
 			<div class="col-md-4 col-sm-4">
 				<article class="modern-grid llms-course-list">
 					<div class="llms-course-link">
-						<?php get_assigned_categories(get_the_id()); ?>					
 						<div class="modern-feature"><a class="" href="<?php the_permalink(); ?>">
 							<?php get_post_image(get_the_id()); ?>
 						</div>
 					<div class="modern-content">
 						<h3 class="llms-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-						<div class="llms-price-wrapper"><h4 class="llms-price"><span><?php price_starting_from(get_the_id());  ?></span></h4></div>
-					</div>
+<!-- 						<div class="llms-price-wrapper"><h4 class="llms-price"><span><?php /* price_starting_from(get_the_id());*/  ?></span></h4></div>
+ -->					</div>
 					<div class="clearfix modern-meta">
 						<div class="col-md-8 col-sm-8 col-xs-8">
 							<?php get_author_avatar(get_the_author_meta('ID')); ?>
