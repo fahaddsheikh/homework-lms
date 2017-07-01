@@ -46,8 +46,12 @@ function hl_show_batch( $post ) {
 
   endif;
   wp_reset_postdata();
-  wp_die( ); 
+   /* AJAX REQUEST check  */
 
+   if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+     /* special ajax here */
+     wp_die();
+   }
 }
 add_action( 'wp_ajax_hl_show_batch', 'hl_show_batch' );
 add_action('wp_ajax_nopriv_hl_show_batch', 'hl_show_batch');

@@ -2,7 +2,7 @@
 /*
  Plugin Name: Homework LMS
  Description: A plugin which allows you to create courses and accept registrations for it.
- Version: 0.2
+ Version: 5.0
  Author: Fahad Sheikh
  License: GPL2
 */
